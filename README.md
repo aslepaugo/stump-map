@@ -25,7 +25,6 @@ The idea is to:
  4. Have fun 
 
 >Q: What to do if I want to contribute but don't see appropriate section?
-
 A: Just drop us a line or create Pull Request 
 
 ### Volunteers:
