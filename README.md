@@ -33,3 +33,14 @@ A: Just drop us a line or create Pull Request
 [how administration can join and participate]
 ### Developers:
 [where to find issue, ideas, roadmaps]
+
+To run app locally:
+
+Unix:
+```
+export FLASK_APP=webapp && export FLASK_ENV=development && flask run
+```
+Windows:
+```
+set FLASK_APP=webapp && set FLASK_ENV=development && set FLASK_DEBUG=1 && flask run
+```
