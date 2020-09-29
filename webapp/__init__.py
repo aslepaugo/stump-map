@@ -1,13 +1,21 @@
-from flask import Flask, render_template
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 
 def create_app():
 
     app = Flask(__name__)
+    app.config.from_pyfile('config.py')
+    db.init_app(app)
 
-    @app.route('/')
-    def index():
+    # blueprint for auth routes in our app
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
 
-        return render_template('index.html', title='Stump Map')
+    # blueprint for non-auth parts of app
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
 
     return app
