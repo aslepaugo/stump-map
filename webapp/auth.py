@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User
+from .models import User, Invite
 from . import db
 
 
@@ -44,9 +44,19 @@ def signup():
 def signup_post():
     email = request.form.get('email')
     password = request.form.get('password')
+    verified_password = request.form.get('verified_password')
+    invite_code = request.form.get('invite_code')
 
-    print(request.data)
-    print('-' * 20)
+    if password != verified_password:
+        flash('Passwords are not simillar')
+        return redirect(url_for('auth.signup'))
+
+    invite = Invite.query.filter_by(invite_code=invite_code).first()
+
+    if not invite:
+        flash('Wrong or expired invite code')
+        return redirect(url_for('auth.signup'))
+
     user = User.query.filter_by(email=email).first()
 
     if user:
