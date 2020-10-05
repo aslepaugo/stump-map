@@ -133,3 +133,5 @@ dmypy.json
 
 settings.py
 bot_telegram/settings.py
+bot_telegram/downloads
+bot_telegram/bot.log
