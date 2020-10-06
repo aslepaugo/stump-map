@@ -1,47 +1,49 @@
 {% extends "base.html" %}
 
+{% block custom_css %}
+<link href={{ url_for('static', filename='css/floating-lables.css') }} rel="stylesheet">
+{% endblock %}
+
+
 {% block content %}
-
-<div class="mx-auto col section-signin">
-
-    <form class="form-signin"  method="POST" action="/signup">
-        <div class="text-center mb-4">
-        <img class="mb-4" src={{ url_for('static', filename='ico/logo.png') }} alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Stump Map</h1>
-        </div>
-        
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="p-3 mb-2 bg-danger text-white">
-                {{ messages[0] }}from yourapplication import User
-            </div>
-        
-        {% endif %}
-        {% endwith %}
-
-        <div class="form-label-group">
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <label for="inputEmail">Email address</label>
+<form class="form-signin"  method="POST" action="/signup">
+    <div class="text-center mb-4">
+    <img class="mb-4" src={{ url_for('static', filename='ico/logo.png') }} alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Stump Map</h1>
+    </div>
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="p-3 mb-2 bg-danger text-white">
+            {{ messages[0] }}from yourapplication import User
         </div>
     
-        <div class="form-label-group">
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-        <label for="inputPassword">Password</label>
-        </div>
+    {% endif %}
+    {% endwith %}
 
-        <div class="form-label-group">
-            <input type="password" name="verified_password" id="verifiedPassword" class="form-control" placeholder="Password" required="">
-            <label for="verifiedPassword">Verify Password</label>
-        </div> 
+    <div class="form-label-group">
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+    <label for="inputEmail">Email address</label>
+    </div>
 
-        <div class="form-label-group">
-            <input type="text" name="invite_code" id="inputCode" class="form-control" placeholder="Password" required="">
-            <label for="inputCode">Invite Code</label>
-        </div>         
+    <div class="form-label-group">
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+    <label for="inputPassword">Password</label>
+    </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    <div class="form-label-group">
+        <input type="password" name="verified_password" id="verifiedPassword" class="form-control" placeholder="Password" required="">
+        <label for="verifiedPassword">Verify Password</label>
+    </div> 
 
-    </form>
+    <div class="form-label-group">
+        <input type="text" name="invite_code" id="inputCode" class="form-control" placeholder="Password" required="">
+        <label for="inputCode">Invite Code</label>
+    </div>         
 
-</div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+
+</form>
+
+
 {% endblock %}

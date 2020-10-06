@@ -8,7 +8,7 @@ from . import db
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/login')
+@auth.route('/login', methods=['GET'])
 def login():
     return render_template('login.html')
 
@@ -35,7 +35,7 @@ def logout():
     return redirect(url_for('main.index'))
 
 
-@auth.route('/signup')
+@auth.route('/signup', methods=['GET'])
 def signup():
     return render_template('signup.html')
 
