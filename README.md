@@ -50,6 +50,6 @@ To initialize and migrate Database:
 python manage.py create_db
 python manage.py db init
 python manage.py db migrate
-# to create test admin with default credentials
-python manage.py create_admin
+# to create test user
+python manage.py create_user
 ```
