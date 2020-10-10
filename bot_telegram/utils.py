@@ -1,5 +1,5 @@
 from datetime import date
-from telegram import ReplyKeyboardMarkup, KeyboardButton
+from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton
 
 import settings
 
@@ -17,8 +17,17 @@ def get_coordinates_button():
 
 
 def get_category_keyboard():
-    reply_keyboard = [
-                      ['Mark location as To Plant'], ['Mark location as a Stump'],
-                      ['Mark location as Dead Tree'], ['Mark location as Dead Sapling']
+    inline_keyboard = [
+                      [InlineKeyboardButton('Mark location as To Plant', callback_data='b_missing_tree')],
+                      [InlineKeyboardButton('Mark location as a Stump', callback_data='b_stump')],
+                      [InlineKeyboardButton('Mark location as Dead Tree', callback_data='b_dead_tree')],
+                      [InlineKeyboardButton('Mark location as Dead Sapling', callback_data='b_dead_sapling')]
+                      # Макс можно ли тут вызвать что-то типа
+                      #[InlineKeyboardButton(someobject.lable, callback_data=someobject.lable.group_name)] 
+                      # чтобы все эти перевороты из группы в лейбл и обратно иметь в чем-то отдельном
                      ]
-    return reply_keyboard
+    #reply_keyboard = [
+    #                  ['Mark location as To Plant'], ['Mark location as a Stump'],
+    #                  ['Mark location as Dead Tree'], ['Mark location as Dead Sapling']
+    #                 ]
+    return inline_keyboard

@@ -1,7 +1,5 @@
-#from datetime import date
-from telegram import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+from telegram import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InlineKeyboardMarkup
 from telegram.ext import ConversationHandler
-#from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from utils import get_coordinates_button, get_category_keyboard, get_photo
 
 from services import save_coordinates, save_photo, save_category
@@ -37,24 +35,20 @@ def marking_point_dialog_coordinates(update, context):
     save_coordinates(coordinates)
     update.message.reply_text(
         'Please select the category for the reported spot',
-        reply_markup=ReplyKeyboardMarkup(keyboard=get_category_keyboard()),
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=get_category_keyboard()),
         resize_keyboard=True)
     return "select_category"
 
 
 def marking_point_dialog_category(update, context):
-    save_category(update.message.text)
-    update.message.reply_text(
-        "Thank you, we will review this place and hope to hear from you soon again.",
-        reply_markup=ReplyKeyboardRemove()
-    )
+    """Returns `ConversationHandler.END`, which tells the
+    ConversationHandler that the conversation is over"""
+    query = update.callback_query
+    query.answer()
+    logging.info("Selected button" + query.data)
+
+    query.edit_message_text(
+        text="Thank you, we will review this place and hope to hear from you soon."
+        )
     return ConversationHandler.END
 
-
-def stop_the_program(update, context):
-    #Still not working
-    #logging.info('Called exit')
-    #update.message.reply_text('Called quit, exiting the program')
-    #update.stop()
-    #update.is_idle = False
-    pass
