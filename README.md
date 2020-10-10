@@ -44,3 +44,12 @@ Windows:
 ```
 set FLASK_APP=webapp && set FLASK_ENV=development && set FLASK_DEBUG=1 && flask run
 ```
+
+To initialize and migrate Database:
+```python
+python manage.py create_db
+python manage.py db init
+python manage.py db migrate
+# to create test admin with default credentials
+python manage.py create_admin
+```
