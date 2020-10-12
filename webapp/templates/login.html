@@ -10,14 +10,6 @@
         <img class="mb-4" src={{ url_for('static', filename='ico/logo.png') }} alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Stump Map</h1>
         </div>
-        
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="p-3 mb-2 bg-danger text-white">
-                {{ messages[0] }}
-            </div>
-        {% endif %}
-        {% endwith %}
 
         <div class="form-label-group">
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
