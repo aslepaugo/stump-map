@@ -44,3 +44,9 @@ Windows:
 ```
 set FLASK_APP=webapp && set FLASK_ENV=development && set FLASK_DEBUG=1 && flask run
 ```
+
+To initialize local Database:
+```python
+from webapp import db, create_app
+db.create_all(app=create_app())
+```
