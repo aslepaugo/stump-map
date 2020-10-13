@@ -135,3 +135,5 @@ dmypy.json
 
 # Migrations
 /migrations
+#Local Databases
+*.sqlite
