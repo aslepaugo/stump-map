@@ -21,6 +21,7 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
 
+  
     from .auth import auth as auth_blueprint
     from .main import main as main_blueprint
 
