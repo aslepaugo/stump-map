@@ -6,6 +6,8 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
 from handlers import (reply_to_start_command, marking_point_dialog_start,
                      marking_point_dialog_coordinates, marking_point_dialog_category)
 
+from categories import Categories
+
 import logging, sys
 import settings
 
@@ -36,11 +38,12 @@ def main():
         states={
             "set_coordinates": [MessageHandler(Filters.location, marking_point_dialog_coordinates)],
             "select_category": [
-                #it is very possible, that there is no need to catch something in particulary here.
-                CallbackQueryHandler(marking_point_dialog_category, pattern='^' + 'b_missing_tree' + '$'),
-                CallbackQueryHandler(marking_point_dialog_category, pattern='^' + 'b_stump' + '$'),                
-                CallbackQueryHandler(marking_point_dialog_category, pattern='^' + 'b_dead_tree' + '$'),
-                CallbackQueryHandler(marking_point_dialog_category, pattern='^' + 'b_dead_sapling' + '$'),                
+                    #it is very possible, that there is no need to catch something in particulary here.
+                    # CallbackQueryHandler(marking_point_dialog_category, pattern='^' + 'b_missing_tree' + '$'),
+                    # CallbackQueryHandler(marking_point_dialog_category, pattern='^' + 'b_stump' + '$'),                
+                    # CallbackQueryHandler(marking_point_dialog_category, pattern='^' + 'b_dead_tree' + '$'),
+                    # CallbackQueryHandler(marking_point_dialog_category, pattern='^' + 'b_dead_sapling' + '$')
+                    CallbackQueryHandler(marking_point_dialog_category, pattern=Categories.get_pattern())                
                                 ]      
                },
         fallbacks=[]

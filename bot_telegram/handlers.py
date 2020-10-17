@@ -1,8 +1,9 @@
 from telegram import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InlineKeyboardMarkup
 from telegram.ext import ConversationHandler
-from utils import get_coordinates_button, get_category_keyboard, get_photo
+from keyboards import get_coordinates_button, get_category_keyboard
 
 from services import save_coordinates, save_photo, save_category
+from categories import Categories
 
 import logging
 import os
@@ -35,7 +36,8 @@ def marking_point_dialog_coordinates(update, context):
     save_coordinates(coordinates)
     update.message.reply_text(
         'Please select the category for the reported spot',
-        reply_markup=InlineKeyboardMarkup(inline_keyboard=get_category_keyboard()),
+#        reply_markup=InlineKeyboardMarkup(inline_keyboard=get_category_keyboard()),
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=Categories.get_keyboard()),
         resize_keyboard=True)
     return "select_category"
 

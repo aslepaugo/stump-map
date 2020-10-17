@@ -3,13 +3,6 @@ from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton
 
 import settings
 
-
-def get_photo():
-    photo_button = KeyboardButton('Send the photo')
-    reply_keyboard = [[photo_button]]
-    return reply_keyboard
-
-
 def get_coordinates_button():
     location_button = KeyboardButton('Set coordinates', request_location=True, one_time_keyboard=True)
     reply_keyboard = [[location_button]]
