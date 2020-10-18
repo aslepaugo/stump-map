@@ -1,0 +1,14 @@
+version: '3'
+services:
+  postgresql:
+    restart: always
+    image: postgres
+    volumes: 
+      - postgresql-dev:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: stump_map
+    ports:
+      - "5430:5432"
+volumes:
+  postgresql-dev:

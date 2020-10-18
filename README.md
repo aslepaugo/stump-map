@@ -45,8 +45,35 @@ Windows:
 set FLASK_APP=webapp && set FLASK_ENV=development && set FLASK_DEBUG=1 && flask run
 ```
 
-To initialize local Database:
+### Set up local DB for development (using docker)
+
+1. Install [Docker](https://docs.docker.com/get-docker/)
+2. Run docker daemon on your machine
+```
+docker version
+```
+will show version instead of
+```
+error during connect:............
+```
+3. From docker\ folder run compose file
+```
+docker-compose up -d
+```
+it will start container with PostgresDB:
+```
+docker-compose up -d
+CONTAINER ID        IMAGE       PORTS                    NAMES
+b668d1df804c        postgres    0.0.0.0:5430->5432/tcp   docker_postgresql_1
+```
+>Port 5432 mapped to 5430
+
+
+To initialize and migrate Database:
 ```python
-from webapp import db, create_app
-db.create_all(app=create_app())
+python manage.py create_db
+python manage.py db init
+python manage.py db migrate
+# to create test user
+python manage.py create_user
 ```
