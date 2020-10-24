@@ -14,42 +14,10 @@
   </head>
   <body >
 
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href={{ url_for('main.index') }}>
-          <img src={{ url_for('static', filename='ico/logo.png') }} width="36" height="36" class="d-inline-block align-top" alt="" loading="lazy">
-          Stump Map
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-
-
-
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-                   
-          <ul class="navbar-nav ml-auto">
-
-          {% if not current_user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href={{ url_for('auth.signup') }}> Sign Up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href={{ url_for('auth.login') }}> Login</a>
-            </li>
-          {% endif %}
-          {% if current_user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href={{ url_for('main.profile') }}> Profile</a></li>
-            <li class="nav-item"><a class="nav-link" href={{ url_for('auth.logout') }}> Log out</a></li>
-          {% endif %}
-
-          </ul>
-
-        </div>
-      </nav>
+      {% include "menu.html" %}
       {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <div class="p-3 mb-2 bg-danger text-white">
+        <div class="alert alert-danger">
             {{ messages[0] }}
         </div>
       {% endif %}
