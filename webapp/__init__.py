@@ -23,10 +23,12 @@ def create_app():
 
     from .auth import auth as auth_blueprint
     from .main import main as main_blueprint
-    from .stump_list import stumps as stump_blueprint
+    from .stump_list import stumps as stump_list_blueprint
+    from .stump import stump_details as stump_details_blueprint
 
-    app.register_blueprint(stump_blueprint)
+    app.register_blueprint(stump_list_blueprint)
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(stump_details_blueprint)
 
     return app

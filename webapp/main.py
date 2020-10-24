@@ -50,7 +50,7 @@ def index():
         latitude = stump.latitude
         longitude = stump.longitude
 
-        stump_description = "<a href='/details/{}' target='_PARENT'>{}</a> ".format(stump.id, stump.stump_type.name)
+        stump_description = "<a href='/stumps/details/{}' target='_PARENT'>{}</a> ".format(stump.id, stump.stump_type.name)
 
         stump_icon = folium.Icon(
                 color=stump.stump_type.color,

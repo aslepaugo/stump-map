@@ -30,6 +30,7 @@ class Stump(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
+    image_url = db.Column(db.String)
 
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     stump_type_id = db.Column(db.Integer, db.ForeignKey('stump_type.id'))
