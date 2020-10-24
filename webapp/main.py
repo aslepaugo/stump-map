@@ -1,9 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_required, current_user
 import folium
-import sys
-from geopy.geocoders import Nominatim
-from .models import Stump
 
 main = Blueprint('main', __name__)
 
