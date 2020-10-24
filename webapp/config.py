@@ -5,3 +5,4 @@ SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:postgres@localhost:543
 
 DEFAULT_CITY = 'Brno'
 USER_AGENT = 'stump-application'
+STUMPS_PER_PAGE = 10

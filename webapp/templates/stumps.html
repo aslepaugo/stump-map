@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<table>
+<table class="table table-striped">
     <thead>
       <tr>
-        <th>City</th>
-        <th>Type</th>
-        <th>Lat</th>
-        <th>Lon</th>
+        <th scope="col">City</th>
+        <th scope="col">Type</th>
+        <th scope="col">Lat</th>
+        <th scope="col">Lon</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
           <td>{{ stump.stump_type.name }}</td>
           <td>{{ stump.latitude }}</td>
           <td>{{ stump.longitude }}</td>
+          <td><a href="/stumps/details/{{ stump.id}}">Details</a></td>
         </tr>
       {% endfor %}
     </tbody>
