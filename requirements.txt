@@ -12,3 +12,4 @@ flask-migrate==2.5.3
 flask-script==2.0.6
 psycopg2==2.8.6
 geopy==2.0.0
+flask-paginate==0.7.1

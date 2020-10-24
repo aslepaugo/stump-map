@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, request, flash
 from flask_login import login_required, current_user
 import folium
 from folium import plugins
@@ -70,21 +70,6 @@ def index():
         city_list=city_list,
         city=requested_city,
         stumps_count=stumps_count)
-
-
-@main.route('/search', methods=['POST'])
-def search():
-
-    city = request.form.get('city')
-    stump_type = request.form.get('type')
-
-    print(city, " ", stump_type)
-
-    # geolocator = Nominatim(user_agent="stump-map")
-    # location = geolocator.geocode(request.form.get('search'))
-    # print((location.latitude, location.longitude), file=sys.stdout)
-
-    return redirect(url_for('main.index'))
 
 
 @main.route('/profile')
