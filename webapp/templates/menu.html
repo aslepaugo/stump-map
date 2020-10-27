@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href={{ url_for('main.index') }}>
+      <img src={{ url_for('static', filename='ico/logo.png') }} width="36" height="36" class="d-inline-block align-top" alt="" loading="lazy">
+      Stump Map
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+   <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Cities
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              
+              {% for city in city_list %}
+                <a class="dropdown-item" href="/?city={{ city.name }} ">{{ city.name }}</a>
+              {% endfor %}
+            </div>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/stumps">Stumps List</a>
+          </li>
+    </ul>
+      <ul class="navbar-nav ml-auto">
+
+      {% if not current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href={{ url_for('auth.signup') }}> Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={{ url_for('auth.login') }}> Login</a>
+        </li>
+      {% endif %}
+      {% if current_user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href={{ url_for('main.profile') }}> Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href={{ url_for('auth.logout') }}> Log out</a></li>
+      {% endif %}
+
+      </ul>
+
+    </div>
+  </nav>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block custom_css %}
+<link href={{ url_for('static', filename='css/pagination.css') }} rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">City</th>
+        <th scope="col">Type</th>
+        <th scope="col">Lat</th>
+        <th scope="col">Lon</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for stump in stumps %}
+        <tr>
+          <td>{{ stump.city.name }}</td>
+          <td>{{ stump.stump_type.name }}</td>
+          <td>{{ stump.latitude }}</td>
+          <td>{{ stump.longitude }}</td>
+          <td><a href="/stumps/details/{{ stump.id}}">Details</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {{ pagination.links }}
+
+  {% endblock %}
