@@ -45,6 +45,7 @@ class Stump(db.Model):
 
     city = relationship("City")
     stump_type = relationship("Stump_type")
+    stump_status = relationship("Stump_status")
 
 
 class Comment(db.Model):

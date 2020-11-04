@@ -19,8 +19,9 @@ data-pagination="true"
       <tr>
         <th scope="col" data-field="city" data-filter-control="select">City</th>
         <th scope="col" data-field="type" data-filter-control="select">Type</th>
-        <th scope="col">Lat</th>
-        <th scope="col">Lon</th>
+        
+        <th scope="col" data-field="status" data-filter-control="select">Status</th>
+        <th scope="col">Created</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -28,9 +29,9 @@ data-pagination="true"
       {% for stump in stumps %}
         <tr>
           <td>{{ stump.city.name }}</td>
-          <td>{{ stump.stump_type.name }}</td>
-          <td>{{ stump.latitude }}</td>
-          <td>{{ stump.longitude }}</td>
+          <td>{{ stump.stump_type.name }}</td>          
+          <td>{{ stump.stump_status.name }}</td>
+          <td>{{ stump.created.strftime('%d.%m.%Y') }}</td>
           <td><a href="/stumps/details/{{ stump.id}}">Details</a></td>
         </tr>
       {% endfor %}
