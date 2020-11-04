@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired
 from webapp.models import Comment
 from webapp import db
 from flask import flash, redirect, request
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 stump_details = Blueprint('stump', __name__)
 
@@ -26,6 +26,7 @@ def stump_detail(id):
 
 
 @stump_details.route('/stump/comment', methods=['POST'])
+@login_required
 def add_comment():
     form = CommentForm()
     if form.validate_on_submit():
