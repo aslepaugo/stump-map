@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, Invite
+from .models import User, Invite, City
 from . import db
 
 
@@ -10,7 +10,8 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET'])
 def login():
-    return render_template('login.html')
+    city_list = City.query.order_by(City.name).all()
+    return render_template('login.html', city_list=city_list)
 
 
 @auth.route('/login', methods=['POST'])
@@ -37,7 +38,8 @@ def logout():
 
 @auth.route('/signup', methods=['GET'])
 def signup():
-    return render_template('signup.html')
+    city_list = City.query.order_by(City.name).all()
+    return render_template('signup.html', city_list=city_list)
 
 
 @auth.route('/signup', methods=['POST'])
