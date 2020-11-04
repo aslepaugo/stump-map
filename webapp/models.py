@@ -27,14 +27,21 @@ class Stump_type(db.Model):
     color = db.Column(db.String)
 
 
+class Stump_status(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
+
+
 class Stump(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     image_url = db.Column(db.String)
+    created = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     stump_type_id = db.Column(db.Integer, db.ForeignKey('stump_type.id'))
+    stump_status_id = db.Column(db.Integer, db.ForeignKey('stump_status.id'))
 
     city = relationship("City")
     stump_type = relationship("Stump_type")
