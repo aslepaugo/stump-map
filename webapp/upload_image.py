@@ -27,6 +27,7 @@ def allowed_image(filename):
 #def create_stump_post():
 @upload_image.route('/upload_image', methods=['GET', 'POST'])
 def upload_file():
+    ''' IMPORTANT this version is just for POC'''
     if request.method == 'POST':
  
         if request.files:
@@ -71,36 +72,11 @@ def upload_file():
 
     return render_template('upload_image.html')
             
-
-            
-
-
-
 '''
-    latitude = request.form.get('latitude')
-    longitude = request.form.get('latitude')
-    image_url = filename
-
-    city_id = 'Brno'
-    stump_type_id = db.Column(db.Integer, db.ForeignKey('stump_type.id'))
-
 #todo insert check for the City from the list of cities.
 #    if not (City.query.filter_by(name=city_id).first())
 
 #todo to add check for the correct stump type
 #    if not (Stump_type.query.filter_by(name=stump_type_id).first())
-
-    new_stump = Stump(
-                    latitude = latitude,
-                    longitude = longitude,
-                    image_url = image_url,
-                    city_id = city_id,
-                    stump_type_id = stump_type_id,
-                     )
-
-    db.session.add(new_stump)
-    db.session.commit()
-
-    return redirect('/create_stump')
-#    return redirect(url_for('auth.login'))
 '''
+

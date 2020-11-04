@@ -137,3 +137,5 @@ dmypy.json
 *.sqlite
 
 webapp/static/img
+webapp/static/*.JPG
+
