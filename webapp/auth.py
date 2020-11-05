@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, Invite, City
-from . import db
+from webapp import db
+from webapp.utils import get_redirect_target
 
 
 auth = Blueprint('auth', __name__)
@@ -10,6 +11,8 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(get_redirect_target())
     city_list = City.query.order_by(City.name).all()
     return render_template('login.html', city_list=city_list)
 
@@ -26,7 +29,7 @@ def login_post():
         return redirect(url_for('auth.login'))
 
     login_user(user)
-    return redirect(url_for('main.profile'))
+    return redirect(get_redirect_target())
 
 
 @auth.route('/logout')
