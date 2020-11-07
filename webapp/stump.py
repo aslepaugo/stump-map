@@ -1,12 +1,12 @@
-from flask import Blueprint, render_template, url_for
-from webapp.models import Stump, City, Stump_type
+from flask import Blueprint, render_template, url_for, flash, redirect
+from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import HiddenField, StringField, SubmitField
-from wtforms.validators import DataRequired
-from webapp.models import Comment
+from wtforms.validators import DataRequired, ValidationError
+
+from webapp.models import Stump, City, Comment
+from webapp.utils import get_redirect_target
 from webapp import db
-from flask import flash, redirect, request
-from flask_login import current_user, login_required
 
 stump_details = Blueprint('stump', __name__)
 
@@ -30,11 +30,10 @@ def stump_detail(id):
 def add_comment():
     form = CommentForm()
     if form.validate_on_submit():
-        if Stump.query.filter(Stump.id == form.stump_id.data).first():
-            comment = Comment(text=form.comment_text.data, stump_id=form.stump_id.data, user_id=current_user.id)
-            db.session.add(comment)
-            db.session.commit()
-            flash('Comment has been added')
+        comment = Comment(text=form.comment_text.data, stump_id=form.stump_id.data, user_id=current_user.id)
+        db.session.add(comment)
+        db.session.commit()
+        flash('Comment has been added')
     else:
         for field, errors in form.errors.items():
             for error in errors:
@@ -42,9 +41,13 @@ def add_comment():
                     getattr(form, field).label.text,
                     error
                 ))
-    return redirect(request.referrer)
+    return redirect(get_redirect_target())
 
 class CommentForm(FlaskForm):
     stump_id = HiddenField('StumpID', validators=[DataRequired()])
     comment_text = StringField('Comment', validators=[DataRequired()], render_kw={"class": "form-control"})
     submit = SubmitField('Post', render_kw={"class": "btn btn-primary"})
+
+    def validate_stump_id(self, stump_id):
+        if not Stump.query.get(stump_id.data):
+            raise ValidationError('You are trying to comment wrong stump data')
