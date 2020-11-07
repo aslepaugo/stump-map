@@ -11,6 +11,7 @@ def is_safe_url(target):
 def get_redirect_target():
     for target in request.values.get('next'), request.referrer:
         if not target:
-            return '/'
+            continue
         if is_safe_url(target):
             return target
+    return '/'
