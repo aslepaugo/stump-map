@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from . import db
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
 
 class User(UserMixin, db.Model):
@@ -37,3 +38,23 @@ class Stump(db.Model):
 
     city = relationship("City")
     stump_type = relationship("Stump_type")
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String, nullable=False)
+    created = db.Column(db.DateTime, nullable=False, default=datetime.now())
+
+    stump_id = db.Column(
+        db.Integer,
+        db.ForeignKey('stump.id', ondelete='CASCADE'),
+        index=True
+    )
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('user.id', ondelete='CASCADE'),
+        index=True
+    )
+
+    news = relationship('Stump', backref='comments')
+    user = relationship('User', backref='comments')

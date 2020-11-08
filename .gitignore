@@ -133,8 +133,6 @@ dmypy.json
 #VS Code
 .vscode
 
-# Migrations
-/migrations
 #Local Databases
 *.sqlite
 

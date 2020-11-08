@@ -74,6 +74,8 @@ To initialize and migrate Database:
 python manage.py create_db
 python manage.py db init
 python manage.py db migrate
+# to upgrade
+# python manage.py db upgrade
 # to create test user
 python manage.py create_user
 ```
