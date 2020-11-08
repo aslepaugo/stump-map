@@ -4,10 +4,10 @@
 <div class="col-md-12">
     <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
       <div class="col p-4 d-flex flex-column position-static">
-        <strong class="d-inline-block mb-2 text-primary">{{ stump.city.name }}</strong>
+        <a href="/?city={{ stump.city.name }}"><strong class="d-inline-block mb-2 text-primary">{{ stump.city.name }}</strong></a>
         <h3 class="mb-0">{{ stump.stump_type.name }}</h3>
-        <div class="mb-1 text-muted">Nov 12</div>
-        <p class="card-text mb-auto">Details should be here</p>
+        <div class="mb-1 text-muted">{{ stump.created.strftime('%d.%m.%Y') }}</div>
+        <p class="card-text mb-auto">{{ stump.stump_status.name }}</p>
       </div>
       <div class="col-auto d-none d-lg-block">
         <img src={{ image_url }} width="500" style="vertical-align:middle; overflow:hidden;">
@@ -39,7 +39,7 @@
       {{ comment_form.submit() }}
   </form>
   {% else %}
-  <p><a href="{{ url_for('auth.login') }}">Log in</a>, to be able to comment</p>
+  <p><a href="{{ url_for('auth.login', next=request.full_path) }}">Log in</a>, to be able to comment</p>
   {% endif %}
   </div>
 {% endblock %}
