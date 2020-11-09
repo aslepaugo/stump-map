@@ -12,14 +12,18 @@ upload_api = Blueprint('upload_api', __name__)
 
 
 def save_file(uploaded_file):
+    '''Saves file to the fs and returns relative directory/filename'''
     filename = (
         time.strftime("%Y%m%d-%H%M%S") + '.' + \
         secure_filename(uploaded_file.filename).rsplit('.', 1)[1]
     )
-    # These commands are commented, while problem with filename is not solved, but it works 
-    uploaded_file.save(os.path.join(
-                          config.PATH_TO_UPLOAD_IMAGES,
-                          filename))
+    # Saving file in the relative directory for uploading images 
+    uploaded_file.save(
+        os.path.join(
+            os.getcwd(),
+            config.PATH_TO_UPLOAD_IMAGES,
+            filename
+            ))
     return 'uploads/'+filename
 
 
@@ -42,7 +46,8 @@ def process_json(data, filename):
                     stump_type_id = stump_type_id_q,
                     )
     print(filename)
-    # These commands are commented, while problem with filename is not solved, but it works    
+
+    # Posting marked point to the db     
     db.session.add(new_stump)
     db.session.commit()
 
@@ -50,7 +55,8 @@ def process_json(data, filename):
 @upload_api.route('/upload_api',methods=['POST'])            
 def test_api():
     #todo first thing first - apikey authorization         
-    print(json.load(request.files['apikey']))                                  
+    print(json.load(request.files['apikey']))
+    #saving file localy to the fs, and getting filename to save it in the db                                  
     filename = save_file(request.files['filename'])
     #todo put into try
     process_json(json.load(request.files['data']),filename)
