@@ -25,10 +25,13 @@ def create_app():
     from .main import main as main_blueprint
     from .stump_list import stumps as stump_list_blueprint
     from .stump import stump_details as stump_details_blueprint
+    from .upload_api import upload_api as upload_api_blueprint
 
     app.register_blueprint(stump_list_blueprint)
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(main_blueprint)
     app.register_blueprint(stump_details_blueprint)
+    app.register_blueprint(upload_api_blueprint)
+
 
     return app

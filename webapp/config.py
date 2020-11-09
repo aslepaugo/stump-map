@@ -6,3 +6,7 @@ SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:postgres@localhost:543
 DEFAULT_CITY = 'Brno'
 USER_AGENT = 'stump-application'
 STUMPS_PER_PAGE = 10
+
+PATH_TO_UPLOAD_IMAGES='webapp/static/uploads/'
+ALLOWED_IMAGE_EXTENSIONS='JPEG', 'JPG', 'PNG', 'GIF'
+API_KEY='very_long_bs'
