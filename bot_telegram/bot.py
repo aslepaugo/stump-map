@@ -27,7 +27,10 @@ PROXY = {
 
 
 def main():
-    mybot = Updater(settings.API_KEY, request_kwargs=PROXY, use_context=True)
+    if settings.PROXY_ACTIVE:
+        mybot = Updater(settings.API_KEY, request_kwargs=PROXY, use_context=True)
+    else:
+        mybot = Updater(settings.API_KEY, use_context=True)
 
     dp = mybot.dispatcher
 
